@@ -30,9 +30,15 @@ highest_arr_delay <- flights %>%
   group_by(dest) %>% 
   summarize(avg_arr_delay = mean(arr_delay, na.rm = T)) %>%
   arrange(-avg_arr_delay)
-
+head(highest_arr_delay)
 # You can look up these airports in the `airports` data frame!
 
 
 # Which city was flown to with the highest average speed?
+city_highest_speed <- flights %>%
+  mutate(speed = distance / air_time * 60) %>%
+  group_by(dest) %>%
+  summarise(avg_speed = mean(speed, na.rm = TRUE)) %>%
+  filter(avg_speed == max(avg_speed, na.rm = TRUE))
 
+print(city_highest_speed)
